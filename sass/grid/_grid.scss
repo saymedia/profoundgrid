@@ -84,6 +84,15 @@ $class_push:		'push';		//				//
 }
 
 /**
+ * Reset the containing element for overiding.
+ */
+@mixin reset(){
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    width: container_width();
+}
+
+/**
  * Align an element to the grid.
  */
 @mixin column($_columns_width, $_padding_columns:null){
@@ -96,6 +105,15 @@ $class_push:		'push';		//				//
     	@include push($_padding_columns);
     }
 }
+
+/**
+ * Align an element to the grid, but that is not use floating, usage: formating content.
+ */
+@mixin width($_columns_width){
+   $_width_perc: element_width($_columns_width);
+   width: $_width_perc;
+}
+
 
 /**
  * Apply to any column to make it the last one of the current row.
@@ -142,7 +160,7 @@ $class_push:		'push';		//				//
 	/* Helper Class: Columns */ 
 	@for $i from 1 through $total_columns{
 		.#{$class_column}#{$i} {
-			@include column($i)
+			@include column($i);
 		}
 	}
 
